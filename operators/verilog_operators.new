@@ -1,0 +1,323 @@
+# SystemVerilog Operators – Complete Example
+
+```systemverilog
+module operators;
+
+  int a = 10;
+  int b = 3;
+
+  logic [3:0] x = 4'b1010;
+  logic [3:0] y = 4'b1100;
+
+  logic p = 1'b1;
+  logic q = 1'b0;
+
+  initial begin
+
+    // ============================================================
+    // 1. ARITHMETIC OPERATORS
+    // ============================================================
+
+    $display("----- ARITHMETIC OPERATORS -----");
+
+    $display("a + b = %0d", a + b);   // Addition
+    $display("a - b = %0d", a - b);   // Subtraction
+    $display("a * b = %0d", a * b);   // Multiplication
+    $display("a / b = %0d", a / b);   // Division
+    $display("a %% b = %0d", a % b);  // Modulus
+
+
+    // ============================================================
+    // 2. RELATIONAL OPERATORS
+    // ============================================================
+
+    $display("\n----- RELATIONAL OPERATORS -----");
+
+    $display("a < b  = %0d", a < b);
+    $display("a > b  = %0d", a > b);
+    $display("a <= b = %0d", a <= b);
+    $display("a >= b = %0d", a >= b);
+
+
+    // ============================================================
+    // 3. EQUALITY OPERATORS
+    // ============================================================
+
+    $display("\n----- EQUALITY OPERATORS -----");
+
+    $display("a == b = %0d", a == b);
+    $display("a != b = %0d", a != b);
+
+    $display("x === y = %0d", x === y);
+    $display("x !== y = %0d", x !== y);
+
+
+    // ============================================================
+    // 4. LOGICAL OPERATORS
+    // ============================================================
+
+    $display("\n----- LOGICAL OPERATORS -----");
+
+    $display("p && q = %0d", p && q);   // Logical AND
+    $display("p || q = %0d", p || q);   // Logical OR
+    $display("!p     = %0d", !p);       // Logical NOT
+
+
+    // ============================================================
+    // 5. BITWISE OPERATORS
+    // ============================================================
+
+    $display("\n----- BITWISE OPERATORS -----");
+
+    $display("x & y = %b", x & y);
+    $display("x | y = %b", x | y);
+    $display("x ^ y = %b", x ^ y);
+    $display("x ~^ y = %b", x ~^ y);
+    $display("x ^~ y = %b", x ^~ y);
+    $display("~x = %b", ~x);
+
+
+    // ============================================================
+    // 6. SHIFT OPERATORS
+    // ============================================================
+
+    $display("\n----- SHIFT OPERATORS -----");
+
+    $display("x << 1 = %b", x << 1);   // Logical left shift
+    $display("x >> 1 = %b", x >> 1);   // Logical right shift
+    $display("x <<< 1 = %b", x <<< 1); // Arithmetic left shift
+    $display("x >>> 1 = %b", x >>> 1); // Arithmetic right shift
+
+
+    // ============================================================
+    // 7. INCREMENT / DECREMENT
+    // ============================================================
+
+    $display("\n----- INCREMENT / DECREMENT -----");
+
+    $display("a = %0d", a);
+
+    a++;
+    $display("a++ = %0d", a);
+
+    a--;
+    $display("a-- = %0d", a);
+
+    ++a;
+    $display("++a = %0d", a);
+
+    --a;
+    $display("--a = %0d", a);
+
+
+    // ============================================================
+    // 8. ASSIGNMENT OPERATORS
+    // ============================================================
+
+    $display("\n----- ASSIGNMENT OPERATORS -----");
+
+    a = 10;
+
+    a += 5;
+    $display("a += 5  -> %0d", a);
+
+    a -= 5;
+    $display("a -= 5  -> %0d", a);
+
+    a *= 2;
+    $display("a *= 2  -> %0d", a);
+
+    a /= 2;
+    $display("a /= 2  -> %0d", a);
+
+    a %= 3;
+    $display("a %%= 3 -> %0d", a);
+
+
+    // ============================================================
+    // 9. CONDITIONAL / TERNARY OPERATOR
+    // ============================================================
+
+    $display("\n----- CONDITIONAL OPERATOR -----");
+
+    $display("Result = %0d", (a > b) ? a : b);
+
+
+    // ============================================================
+    // 10. CONCATENATION OPERATOR
+    // ============================================================
+
+    $display("\n----- CONCATENATION -----");
+
+    $display("x = %b", x);
+    $display("y = %b", y);
+    $display("{x,y} = %b", {x,y});
+
+
+    // ============================================================
+    // 11. REPETITION OPERATOR
+    // ============================================================
+
+    $display("\n----- REPETITION -----");
+
+    $display("{3{x}} = %b", {3{x}});
+
+
+    // ============================================================
+    // 12. INSIDE OPERATOR
+    // ============================================================
+
+    $display("\n----- INSIDE OPERATOR -----");
+
+    if (a inside {[1:10]})
+      $display("a is between 1 and 10");
+    else
+      $display("a is outside the range");
+
+
+    // ============================================================
+    // 13. SET MEMBERSHIP / ARRAY EXAMPLE
+    // ============================================================
+
+    int values[5] = '{10, 20, 30, 40, 50};
+
+    $display("\n----- ARRAY -----");
+
+    if (30 inside {values})
+      $display("30 is present in array");
+
+
+    // ============================================================
+    // 14. EXPONENTIATION
+    // ============================================================
+
+    $display("\n----- EXPONENTIATION -----");
+
+    $display("2 ** 3 = %0d", 2 ** 3);
+
+
+    // ============================================================
+    // 15. IMPLICATION OPERATORS
+    // ============================================================
+    // Mainly used in SystemVerilog Assertions (SVA)
+
+    // |->  Overlapped implication
+    // |=>  Non-overlapped implication
+
+    // Example:
+    //
+    // property p;
+    //   req |-> ack;
+    // endproperty
+
+
+    // ============================================================
+    // 16. SVA SEQUENCE OPERATORS
+    // ============================================================
+    // These are used in assertions.
+
+    // ##  -> Clock cycle delay
+    // Example:
+    //
+    // req ##1 ack
+
+
+    // ============================================================
+    // 17. REDUCTION OPERATORS
+    // ============================================================
+
+    $display("\n----- REDUCTION OPERATORS -----");
+
+    $display("&x  = %0d", &x);
+    $display("|x  = %0d", |x);
+    $display("^x  = %0d", ^x);
+    $display("~&x = %0d", ~&x);
+    $display("~|x = %0d", ~|x);
+    $display("~^x = %0d", ~^x);
+    $display("^~x = %0d", ^~x);
+
+
+    // ============================================================
+    // 18. LOGICAL REDUCTION / BOOLEAN EXAMPLE
+    // ============================================================
+
+    if (a && b)
+      $display("Both a and b are non-zero");
+
+    if (a || b)
+      $display("At least one of a or b is non-zero");
+
+
+    // ============================================================
+    // 19. BIT SELECT
+    // ============================================================
+
+    $display("\n----- BIT SELECT -----");
+
+    $display("x[0] = %b", x[0]);
+    $display("x[3] = %b", x[3]);
+
+
+    // ============================================================
+    // 20. PART SELECT
+    // ============================================================
+
+    $display("\n----- PART SELECT -----");
+
+    $display("x[3:2] = %b", x[3:2]);
+    $display("x[1:0] = %b", x[1:0]);
+
+  end
+
+endmodule
+/*
+## Operator categories to remember
+
+| Category            | Operators                             |   |    |
+| ------------------- | ------------------------------------- | - | -- |
+| Arithmetic          | `+ - * / % **`                        |   |    |
+| Relational          | `< > <= >=`                           |   |    |
+| Equality            | `== != === !==`                       |   |    |
+| Logical             | `&&                                   |   | !` |
+| Bitwise             | `& \| ^ ~ ^~ ~^`                      |   |    |
+| Shift               | `<< >> <<< >>>`                       |   |    |
+| Increment/Decrement | `++ --`                               |   |    |
+| Assignment          | `= += -= *= /= %= <<= >>= &= \|= ^= ` |   |    |
+| Conditional         | `?:`                                  |   |    |
+| Concatenation       | `{}`                                  |   |    |
+| Replication         | `{N{}}`                               |   |    |
+| Reduction           | `& \| ^ ~& ~\| ~^ ^~`                 |   |    |
+| Membership          | `inside`                              |   |    |
+| Exponentiation      | `**`                                  |   |    |
+| SVA implication     | `\|-> \|=>`                           |   |    |
+| SVA delay           | `##`                                  |   |    |
+
+### Most important distinction
+
+For verification, pay special attention to these:
+
+```text
+==   → Logical equality
+===  → Case equality (checks X/Z too)
+
+&    → Bitwise AND
+&&   → Logical AND
+
+|    → Bitwise OR
+||   → Logical OR
+
+^    → Bitwise XOR / reduction XOR depending on operands
+~^   → XNOR
+
+<<   → Logical left shift
+>>   → Logical right shift
+<<<  → Arithmetic left shift
+>>>  → Arithmetic right shift
+
+=    → Blocking assignment
+<=   → Non-blocking assignment
+```
+
+**Note:** `=` and `<=` are also assignment operators, but in RTL/verification code they have important procedural-assignment semantics beyond simply being arithmetic-style operators.
+
+*/
